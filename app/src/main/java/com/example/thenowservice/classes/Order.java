@@ -16,6 +16,7 @@ public class Order implements Serializable{
     private long id_order;
     private int table;
     private float total_price;
+    private boolean paid;
     @TypeConverters({Converters.class})
     private ArrayList<Product> product_list;
 
@@ -25,7 +26,7 @@ public class Order implements Serializable{
         this.id_order = 0;
         this.table = table;
         this.product_list = product_list;
-
+        this.paid = false;
         this.total_price = calculateTotalPrice();
     }
 
@@ -69,4 +70,13 @@ public class Order implements Serializable{
     public void setProduct_list(ArrayList<Product> product_list) {
         this.product_list = product_list;
     }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
+    }
+
 }

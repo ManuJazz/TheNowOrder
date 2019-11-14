@@ -20,18 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AllOrdersFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AllOrdersFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AllOrdersFragment extends Fragment {
     private View rootView;
     private List<Order> orderList;
     private ListView listViewOrders;
+    private OrderAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,10 +35,15 @@ public class AllOrdersFragment extends Fragment {
         loadOrders();
 
         this.listViewOrders = this.rootView.findViewById(R.id.order_list);
-        this.listViewOrders.setAdapter(new OrderAdapter(this.getContext(), (ArrayList<Order>) this.orderList));
+        this.adapter = new OrderAdapter(this.getContext(), (ArrayList<Order>) this.orderList, getActivity());
+        this.listViewOrders.setAdapter(this.adapter);
         //get orders from database
 
         return this.rootView;
+    }
+
+    private void updateOrdersList(){
+        this.adapter.notifyDataSetChanged();
     }
 
     private void loadOrders() {

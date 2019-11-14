@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity
         loadDefaultFragment();
     }
 
-    private void loadDefaultFragment() {
+    public void loadDefaultFragment() {
         //Carga fragment por defecto
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.mainActitivityContent, new AllOrdersFragment()).commit();
